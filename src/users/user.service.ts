@@ -6,13 +6,15 @@ import { Repository, getManager, getConnection } from 'typeorm';
 export class UsersService {
     constructor(@InjectRepository(User)
     private readonly userRepository: Repository<User>) { }
-    async  create(): Promise<string>{
+        async  create(): Promise<string>{
         let user = new User()
-        user.name = 'bao'
+        user.username = 'bao'
+        user.password = '2d'
         return this.userRepository.save(user).then(res => {
             return 'create employee ...done'
         })
         .catch(err => {
+            console.log(err)
             return err
         });
     }
