@@ -1,18 +1,24 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersService } from './users/user.service';
-import { UsersController } from './users/user.controller';
-import { UsersModule } from './users/user.module';
+import { UsersService } from './service/user.service';
+import { UsersController } from './controller/user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ContentController } from './content/content.controller';
-import { ContentService } from './content/content.service';
+import { ContentController } from './controller/content.controller';
+import { ContentService } from './service/content.service';
+import { CryptoUtil} from './utils/crypto.util'
+import {AuthService} from './service/auth.service'
+//entity
+import {User} from './entity/user.entity'
+import {Content} from './entity/content.entity'
+import { from } from 'rxjs';
+ 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
-    UsersModule
+    TypeOrmModule.forFeature([User, Content])
   ],
   controllers: [AppController, UsersController, ContentController],
-  providers: [AppService, UsersService, ContentService],
+  providers: [AppService, UsersService, ContentService,AuthService, CryptoUtil],
 })
 export class AppModule {}

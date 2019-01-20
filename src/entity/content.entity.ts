@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn ,OneToOne} from 'typeorm';
-
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, UpdateDateColumn ,OneToOne} from 'typeorm';
+import {Meta} from './meta.entity'
+import { from } from 'rxjs';
 @Entity('content')
 export class Content {
     @PrimaryGeneratedColumn()
@@ -16,4 +17,8 @@ export class Content {
     
     @Column()
     uid: number
+    
+
+    @ManyToOne(type => Meta, meta => meta.contents)
+    meta: Meta
 }
