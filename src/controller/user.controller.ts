@@ -11,13 +11,18 @@ export class UsersController {
       /* return this.authService.login(params.name, params.password); */
       return this.userService.create(params.username, params.password);
     } 
-    
+
 
     @Get('login') 
-    async login(@Query() qery) :Promise<any>{
-      console.log('params', qery)
-      return this.userService.login(qery.username, qery.password);
+    async login(@Query() query) :Promise<any>{
+      console.log('params', query)
+      return this.userService.login(query.username, query.password);
     }
 
+    @Get('checklogin')
+    //@UseGuards(new RoleGuard(['admin']))
+    public checkLogin(@Query() query) {
+      return this.userService.checklogin(query.token)
+    }
 
 }

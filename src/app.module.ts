@@ -7,7 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ContentController } from './controller/content.controller';
 import { ContentService } from './service/content.service';
 import { CryptoUtil} from './utils/crypto.util'
-import {AuthService} from './service/auth.service'
+import { AuthService } from './service/auth.service'
+import { HttpStrategy } from './common/http.strategy'
 //entity
 import {User} from './entity/user.entity'
 import {Content} from './entity/content.entity'
@@ -19,6 +20,6 @@ import { from } from 'rxjs';
     TypeOrmModule.forFeature([User, Content])
   ],
   controllers: [AppController, UsersController, ContentController],
-  providers: [AppService, UsersService, ContentService,AuthService, CryptoUtil],
+  providers: [AppService, UsersService, ContentService,AuthService, CryptoUtil, HttpStrategy],
 })
 export class AppModule {}

@@ -28,23 +28,25 @@ export class UsersService {
             return err
         });
     }
-    findOneByToken(token) {
-        jwt.verify(token, 'secretKey');
-    }
+
     async login(username: string, password: string): Promise<any>{ 
        let user =  await  this.userRepository.findOne({username: username})
        console.log('data', user)
        if(user) {
         if( !this.cryptoUtil.checkPassword(password, user.password)) {
-            return {code: 406 , masssage:'密码有误'}
-        } else {
-          // token
+            return {code: 406 , message:'密码有误'}
+        }else {
           return await this.authService.createToken({username, password})
         }
        }else {
         return {code: 409}
        }
+
+
+       
     }
-    
+    async  checklogin(token) {
+      return this.authService.checkToken(token);
+    }
 
 }
