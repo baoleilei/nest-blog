@@ -8,7 +8,5 @@ export class Meta {
 
     @Column('varchar',{length:'200'})
     name: string
-
-    @OneToMany(type => Content, content => content.meta )
-    contents: Content
+    
 }
