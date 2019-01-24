@@ -1,11 +1,11 @@
 import { Controller,UseGuards, Post, Request} from '@nestjs/common';
-import { Content } from '../entity/content.entity' 
+import { Blog } from '../entity/blog.entity' 
 import { AuthGuard } from '@nestjs/passport'
-import {ContentService} from '../service/content.service' 
+import {BlogService} from '../service/blog.service' 
 
-@Controller('content')
+@Controller('blog')
 export class ContentController {
-  constructor(private readonly contentService: ContentService) { }
+  constructor(private readonly contentService: BlogService) { }
 
   @Post('create')
   @UseGuards(AuthGuard('jwt'))

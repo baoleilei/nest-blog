@@ -1,10 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, ManyToOne, UpdateDateColumn ,OneToOne} from 'typeorm';
-import {Meta} from './meta.entity'
-import { from } from 'rxjs';
-@Entity('content')
-export class Content {
-    @PrimaryGeneratedColumn()
-    cid: number
+@Entity('blog')
+export class Blog {
+    @PrimaryGeneratedColumn({name:'blog_id'})
+    blogId: number
 
     @Column('varchar',{length:'200'})
     title: string
@@ -15,6 +13,6 @@ export class Content {
     })
     content: string
     
-    @Column('int')
-    uid: number
+    @Column('int',{name: 'user_id'})
+    userId: number
 }
