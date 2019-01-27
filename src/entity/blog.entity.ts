@@ -15,4 +15,7 @@ export class Blog {
     
     @Column('int',{name: 'user_id'})
     userId: number
+    
+    @Column('int',{name: 'categor_id'})
+    categoryId: number
 }

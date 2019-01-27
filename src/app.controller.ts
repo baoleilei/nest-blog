@@ -10,7 +10,7 @@ export class AppController {
   @Get()
   @UseGuards(AuthGuard('jwt'))
   getHello(@Request()	req): string {
-    console.log('re111q111', req.user)
+    // console.log('re111q111', req.user)
     return this.appService.getHello();
   }
 }

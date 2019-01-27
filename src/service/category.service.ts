@@ -12,6 +12,8 @@ export class CategoryService {
      *  注册
      */
     async create(categoryName): Promise<any>{
-       this.categoryRepository.save(categoryName)
+      let categ = new Category()
+      categ.categoryName = categoryName
+      return this.categoryRepository.save(categ)
     }
 }

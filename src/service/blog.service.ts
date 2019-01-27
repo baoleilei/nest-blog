@@ -11,19 +11,13 @@ export class BlogService {
     @InjectRepository(User)  private readonly userRepository: Repository<User>,
     @Inject(CryptoUtil) private readonly cryptoUtil: CryptoUtil,
 ) {}
-  async create(user) {
-  
-    let content = new Blog()
-    content.title = '1'
-    content.content = 'con'
-   
+  async create(user, createCatDto) {
     // todo
     let duser=  await this.userRepository.findOne({username:user.username})
-    content.userId = duser.userId
+    createCatDto.userId = duser.userId
+
     console.log('duser',duser)
-    return this.contentRepository.save(content)
-      .then(() => {
-        return 'sucess create'
-      })
+    return this.contentRepository.save(createCatDto)
+  
   }
 }
