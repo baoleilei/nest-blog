@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, UpdateDateColumn ,OneToOne,CreateDateColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import * as moment from 'moment';
 
 @Entity('category')
 export class Category {
@@ -8,9 +9,27 @@ export class Category {
     @Column('varchar',{name: 'category_name', length:'200'})
     categoryName: string
 
-    @CreateDateColumn({name: 'created_at'})
-    createdAt: string;
+    @CreateDateColumn({
+        transformer: {
+            from: (date: Date) => {
+                return moment(date).format('YYYY-MM-DD HH:mm:ss');
+            },
+            to: () => {
+                return new Date();
+            }
+        }
+    })
+    created_at: string;
 
-    @UpdateDateColumn({name: 'updated_at'})
-    updatedAt: string;
+    @UpdateDateColumn({
+        transformer: {
+            from: (date: Date) => {
+                return moment(date).format('YYYY-MM-DD HH:mm:ss');
+            },
+            to: () => {
+                return new Date();
+            }
+        }
+    })
+    updated_at: string;
 }
