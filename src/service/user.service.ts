@@ -1,7 +1,6 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { User } from '../entity/user.entity'
 import { InjectRepository } from '@nestjs/typeorm';
-import * as jwt from 'jsonwebtoken';
 import { CryptoUtil } from '../utils/crypto.util';
 import { Repository, getManager, getConnection } from 'typeorm';
 
@@ -20,9 +19,7 @@ export class UsersService {
         let user = new User()
         user.username = username
         user.password =  await this.cryptoUtil.encryptPassword(password)
-        return this.userRepository.save(user).then(res => {
-            return {code: 200, message: '注册成功'}
-        })
+        return this.userRepository.save(user)
         .catch(err => {
             console.log(err)
             return err
@@ -34,12 +31,12 @@ export class UsersService {
        console.log('data', user)
        if(user) {
         if( !this.cryptoUtil.checkPassword(password, user.password)) {
-            return {code: 406 , message:'密码有误'}
+            return { data:'密码有误'}
         }else {
           return await this.authService.createToken({username, password})
         }
        }else {
-        return {code: 409}
+        return {data: ' 无该用户'}
        }
 
 
